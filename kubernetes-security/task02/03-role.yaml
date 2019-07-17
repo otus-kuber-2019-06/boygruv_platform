@@ -22,5 +22,5 @@ roleRef:
   name: pod-view
 subjects:
 - kind: Group
-  name: system:serviceaccounts
+  name: system:serviceaccounts:prometheus
   namespace: prometheus
