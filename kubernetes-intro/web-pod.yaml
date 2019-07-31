@@ -8,6 +8,9 @@ spec:
   containers: 
   - name: web
     image: boygruv/kubernetes-intro-web:latest
+    readinessProbe:
+      tcpSocket:
+        port: 8000
     volumeMounts:
       - name: app
         mountPath: /app
