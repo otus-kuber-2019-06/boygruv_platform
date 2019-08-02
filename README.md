@@ -31,3 +31,8 @@
 - Переключили Minikube на режим IPVS
 - Изучили механизм LoadBalancer на примере MetalLB
 - Изучили сущность Ingress
+
+## Homework-4 (Volumes, Storages,StatefulSetStatefulS)
+- Изучили сущность StatefulSet
+- Изучили сущность PV
+- Изучили сущность PVC
