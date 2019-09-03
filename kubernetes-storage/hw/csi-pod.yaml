@@ -7,7 +7,7 @@ metadata:
 spec:
   restartPolicy: Always
   containers:
-    - image: bash
+    - image: bashell/alpine-bash
       name: bash
       volumeMounts:
       - mountPath: "/data"
