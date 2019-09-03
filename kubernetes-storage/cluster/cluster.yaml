@@ -1,4 +1,3 @@
-# this config file contains all config fields with comments
 kind: Cluster
 apiVersion: kind.sigs.k8s.io/v1alpha3
 kubeadmConfigPatches:
