@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: pod-test
+  name: storage-pod
   labels:
     name: busybox-test
 spec:
@@ -16,4 +16,4 @@ spec:
   volumes:
     - name: vol
       persistentVolumeClaim:
-        claimName: csi-pvc
+        claimName: storage-pvc
