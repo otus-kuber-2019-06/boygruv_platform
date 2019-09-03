@@ -3,12 +3,12 @@ kind: Pod
 metadata:
   name: storage-pod
   labels:
-    name: busybox-test
+    name: bash-test
 spec:
   restartPolicy: Always
   containers:
-    - image: busybox
-      name: busybox
+    - image: bash
+      name: bash
       volumeMounts:
       - mountPath: "/data"
         name: vol
