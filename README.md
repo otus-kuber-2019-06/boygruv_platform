@@ -36,3 +36,14 @@
 - Изучили сущность StatefulSet
 - Изучили сущность PV
 - Изучили сущность PVC
+
+## Homework-5 (CSI-драйвера)
+- Создал кластер с указанием параметров для включения Snapshot (VolumeSnapshotDataSource=true)
+- Добавил драйвер CSI - csi-driver-host-path (https://github.com/kubernetes-csi/csi-driver-host-path)
+- Добавил в кластер StorageClass с указанием провизионера hostpath.csi.k8s.io
+- Создал PersistentVolumeClaim с указанным storageClassName созданным на предидущем этапе
+- Создал Pod с указанием созданного PersistentVolumeClaim
+- VolumeShapshotClass для нашего провизионера создался автоматически при установке драйвера
+- Создал снапшот с созданного PersistentVolumeClaim (kubectl get volumesnapshot)
+- Удалил под, удалил PVC
+- Восстановил PVC из снапшота, восстановил под 

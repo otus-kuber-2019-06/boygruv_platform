@@ -1,0 +1,34 @@
+kind: Cluster
+apiVersion: kind.sigs.k8s.io/v1alpha3
+kubeadmConfigPatches:
+- |
+  apiVersion: kubeadm.k8s.io/v1beta2
+  kind: ClusterConfiguration
+  metadata:
+    name: config
+  apiServer:
+    extraArgs:
+      "feature-gates": "VolumeSnapshotDataSource=true"
+  scheduler:
+    extraArgs:
+      "feature-gates": "VolumeSnapshotDataSource=true"
+  controllerManager:
+    extraArgs:
+      "feature-gates": "VolumeSnapshotDataSource=true"
+- |
+  apiVersion: kubeadm.k8s.io/v1beta2
+  kind: InitConfiguration
+  metadata:
+    name: config
+  nodeRegistration:
+    kubeletExtraArgs:
+      "feature-gates": "VolumeSnapshotDataSource=true"
+
+# 1 control plane node and 3 workers
+#nodes:
+#- role: control-plane
+# the three workers
+#- role: worker
+#- role: worker
+#- role: worker
+
