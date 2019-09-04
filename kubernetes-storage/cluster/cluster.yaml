@@ -25,10 +25,10 @@ kubeadmConfigPatches:
       "feature-gates": "VolumeSnapshotDataSource=true"
 
 # 1 control plane node and 3 workers
-nodes:
-- role: control-plane
+#nodes:
+#- role: control-plane
 # the three workers
-- role: worker
+#- role: worker
 #- role: worker
 #- role: worker
 
