@@ -46,4 +46,24 @@
 - VolumeShapshotClass для нашего провизионера создался автоматически при установке драйвера
 - Создал снапшот с созданного PersistentVolumeClaim (kubectl get volumesnapshot)
 - Удалил под, удалил PVC
-- Восстановил PVC из снапшота, восстановил под 
+- Восстановил PVC из снапшота, восстановил под  
+
+## Homework-6 (Debug)
+### kubectl debug
+Для запуска `sctarce -c -p1` необходимы capabilites "SYS_PTRACE". Для устанвоки необходимых capabilites в манифест описания пода надо добавить
+```
+    securityContext:
+      capabilities:
+        add: ["NET_ADMIN", "SYS_PTRACE", "SYS_ADMIN"]
+```
+### iptables-tailer
+- https://github.com/box/kube-iptables-tailer
+- Выводит информацию об отброшенных iptables пакетах в события пода (describe po), а также в журнал событий Kubernetes (kubectl get events)
+- Для корректной работы необходима настройка ServiceAccount
+- **netperf-operator** (https://github.com/piontec/netperf-operator). Kubernetes-оператор,который позволяет запускать тесты пропускной способности сети между нодами кластера
+- Проверка заблокированных пакетов на ноде?
+```
+      $ iptables --list -nv | grep DROP
+      $ iptables --list -nv | grep LOG
+      $ journalctl -k | grep calico-pack
+```
