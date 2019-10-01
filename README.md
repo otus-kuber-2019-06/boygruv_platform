@@ -46,4 +46,55 @@
 - VolumeShapshotClass для нашего провизионера создался автоматически при установке драйвера
 - Создал снапшот с созданного PersistentVolumeClaim (kubectl get volumesnapshot)
 - Удалил под, удалил PVC
-- Восстановил PVC из снапшота, восстановил под 
+- Восстановил PVC из снапшота, восстановил под  
+
+## Homework-6 (Debug)
+### kubectl debug
+Для запуска `sctarce -c -p1` необходимы capabilites "SYS_PTRACE". Для устанвоки необходимых capabilites в манифест описания пода надо добавить
+```
+    securityContext:
+      capabilities:
+        add: ["NET_ADMIN", "SYS_PTRACE", "SYS_ADMIN"]
+```
+### iptables-tailer
+- https://github.com/box/kube-iptables-tailer
+- Выводит информацию об отброшенных iptables пакетах в события пода (describe po), а также в журнал событий Kubernetes (kubectl get events)
+- Для корректной работы необходима настройка ServiceAccount
+- **netperf-operator** (https://github.com/piontec/netperf-operator). Kubernetes-оператор,который позволяет запускать тесты пропускной способности сети между нодами кластера
+- Проверка заблокированных пакетов на ноде?
+```
+      $ iptables --list -nv | grep DROP
+      $ iptables --list -nv | grep LOG
+      $ journalctl -k | grep calico-pack
+```
+
+## Homework-7 (Операторы)
+### CustomResourceDefinition
+- CustomResourceDefinition- ресурс для определения CustomResource
+- Cоздание CustomResourceDefinition создает RESTful путь для каждой описанной версии CustomResource
+- Определяет структуру и доступные версии для конкретного CustomResource
+- CustomResourceDefinition: это ресурс для определения других ресурсов (далее CRD)
+- Посмотреть CRD и CR
+```
+    $ kubectl get crd
+    $ kubectl get mysqls.otus.homework
+    $ escribe mysqls.otus.homework mysql-instance
+```
+- Validation
+- Operator SDK (ansible) https://github.com/operator-framework/operator-sdk/blob/master/doc/proposals/ansible-operator.md
+- Kubernetes Operator Pythonic Framework (Kopf) https://github.com/zalando-incubator/kopf
+- Выполнение комманды `kubectl get jobs`
+```
+NAME                         COMPLETIONS   DURATION   AGE
+backup-mysql-instance-job    1/1           2s         4m37s
+restore-mysql-instance-job   1/1           6m21s      7m6s
+```
+- Вывод при запущенном MySQL
+```
++----+-------------+
+| id | name        |
++----+-------------+
+|  1 | some data   |
+|  2 | some data-2 |
++----+-------------+
+```
