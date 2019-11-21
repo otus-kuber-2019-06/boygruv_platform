@@ -1,0 +1,40 @@
+environments:
+  default:
+    values:
+    - domain: 35.195.201.47
+
+repositories:
+- name: stable
+  url: https://kubernetes-charts.storage.googleapis.com
+- name: jetstack
+  url: https://charts.jetstack.io
+- name: harbor
+  url: https://helm.goharbor.io
+
+templates:
+  template: &template
+    missingFileHandler: Info
+    values:
+    - ./values/{{`{{.Release.Name}}`}}.yaml.gotmpl
+
+releases:
+- name: nginx-ingress
+  namespace: nginx-ingress
+  chart: stable/nginx-ingress
+  version: 1.11.1
+
+- name: cert-manager
+  namespace: cert-manager
+  chart: jetstack/cert-manager
+  version: 0.9.0
+
+- name: harbor
+  namespace: harbor
+  chart: harbor/harbor
+  version: 1.1.2
+  <<: *template
+
+helmfiles:
+- path: https://raw.githubusercontent.com/jetstack/cert-manager/release-0.9/deploy/manifests/00-crds.yaml
+  selectors:
+  - name=cert-manager

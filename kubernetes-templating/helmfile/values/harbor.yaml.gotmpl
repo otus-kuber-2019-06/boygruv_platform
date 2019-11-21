@@ -1,0 +1,6 @@
+expose:
+  ingress:
+    hosts:
+      core: harbor.{{ .Values | get "domain" }}.nip.io
+      notary: notary.{{ .Values | get "domain" }}.nip.io
+
